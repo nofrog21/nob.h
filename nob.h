@@ -210,6 +210,7 @@
     (NOB_ASSERT((size_t)index < NOB_ARRAY_LEN(array)), array[(size_t)index])
 
 typedef enum {
+    NOB_DEBUG,
     NOB_INFO,
     NOB_WARNING,
     NOB_ERROR,
@@ -1900,6 +1901,9 @@ NOBDEF void nob_default_log_handler(Nob_Log_Level level, const char *fmt, va_lis
     if (level < nob_minimal_log_level) return;
 
     switch (level) {
+    case NOB_DEBUG:
+        fprintf(stderr, "[DEBUG] ");
+        break;
     case NOB_INFO:
         fprintf(stderr, "[INFO] ");
         break;
@@ -1928,6 +1932,9 @@ NOBDEF void nob_null_log_handler(Nob_Log_Level level, const char *fmt, va_list a
 NOBDEF void nob_cancer_log_handler(Nob_Log_Level level, const char *fmt, va_list args)
 {
     switch (level) {
+    case NOB_DEBUG:
+        fprintf(stderr, "🐞 \x1b[35m[DEBUG]\x1b[0m ");
+        break;
     case NOB_INFO:
         fprintf(stderr, "ℹ️ \x1b[36m[INFO]\x1b[0m ");
         break;
