@@ -1931,6 +1931,8 @@ NOBDEF void nob_null_log_handler(Nob_Log_Level level, const char *fmt, va_list a
 
 NOBDEF void nob_cancer_log_handler(Nob_Log_Level level, const char *fmt, va_list args)
 {
+    if (level < nob_minimal_log_level) return;
+
     switch (level) {
     case NOB_DEBUG:
         fprintf(stderr, "🐞 \x1b[35m[DEBUG]\x1b[0m ");
